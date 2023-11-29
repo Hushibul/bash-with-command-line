@@ -22,17 +22,15 @@ echo "Type an operation: insert or update or delete or rename"
 read operation
 
 if [ "$operation" == "insert" ]; then 
-    echo "Enter file_name or press Enter"
+    echo "Enter file_name"
     read file_name
 
     if [ -z "file_name" ]; then
-        file_name=$(uuidgen)
-        file_name="$file_name.txt"
-
-        touch "file_name"
-        echo "File $file_name created"
+       echo "File did not inserted"
     else
         touch "$file_name.txt"
+        echo "File $file_name created"
+
     fi
 elif [ "$operation" == "update" ]; then
     echo "Enter Existing file_name"
@@ -53,6 +51,10 @@ elif [ "$operation" == "delete" ]; then
 
     if [ -e "$file_name" ]; then 
         rm -r "$(pwd)"/$file_name
+        echo "$file_name successfully deleted"
+    elif [ "$file_name" == "all" ]; then
+        rm -r *.txt
+        echo "All files deleted" 
     else 
         echo "$file_name does not exits!!!"
     fi
